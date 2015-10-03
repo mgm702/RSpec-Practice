@@ -1,0 +1,6 @@
+language: ruby
+rvm:
+  - "2.2.3"
+script: bundle exec cucumber -r features features
+gemfile: homework_tester/Gemfile
+install: cd homework_tester && bundle install --jobs=3 --retry=3
