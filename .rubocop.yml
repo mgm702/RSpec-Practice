@@ -1,0 +1,5 @@
+AllCops:
+  Exclude:
+    - "Guardfile"
+    - "Gemfile"
+    - "homework_tester/**/*"
