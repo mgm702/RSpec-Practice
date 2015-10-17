@@ -20,3 +20,13 @@ class CashRegister
     end
   end
 end
+
+register = CashRegister.new
+puts register.total
+register.purchase(3.78)
+register.purchase(5.22)
+puts register.total
+puts register.pay(5.00)
+puts register.total
+puts register.pay(4.02)
+puts register.total
