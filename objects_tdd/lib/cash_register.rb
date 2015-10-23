@@ -12,6 +12,12 @@ class CashRegister
 
   def pay(amount)
     @total -= amount
-    "Your new total is $#{@total.abs.round(2)}"
+    if @total < 0
+      "Your change is $#{@total.abs.round(2)}"
+    elsif @total == 0
+      return 'You paid the exact amount, there is no change to give.'
+    else
+      "Your new total is $#{@total.abs.round(2)}"
+    end
   end
 end

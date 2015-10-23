@@ -33,13 +33,16 @@ describe CashRegister do
     end
 
     context 'When I pay more then the amount' do
-      it 'should return how much change I should received'
-      it 'should return total to zero after giving out change'
+      it 'should return how much change I should received' do
+        expect(cash_register.pay(11.25)).to eq('Your change is $1.25')
+      end
     end
 
     context 'When I pay the exact amount' do
-      it "should tell me that I don't owe anything"
-      it 'should return total to zero after payment is made'
+      it "should tell me that I don't owe anything" do
+        expect(cash_register.pay(10)).to eq('You paid the exact'\
+        ' amount, there is no change to give.')
+      end
     end
   end
 end
