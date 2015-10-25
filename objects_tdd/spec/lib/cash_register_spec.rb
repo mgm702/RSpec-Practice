@@ -33,15 +33,28 @@ describe CashRegister do
     end
 
     context 'When I pay more then the amount' do
-      it 'should return how much change I should received' do
-        expect(cash_register.pay(11.25)).to eq('Your change is $1.25')
+      it 'return how much change I should received' do
+        # rubocop:disable Metrics/LineLength
+        expect { cash_register.pay(11.25) }.to output("Your change is $1.25\n").to_stdout
+        # rubocop:enable Metrics/LineLength
+      end
+      it 'make total zero' do
+        # rubocop:disable Metrics/LineLength
+        expect { cash_register.pay(11.25) }.to change(cash_register, :total).from(10).to(0)
+        # rubocop:enable Metrics/LineLength
       end
     end
 
     context 'When I pay the exact amount' do
       it "should tell me that I don't owe anything" do
-        expect(cash_register.pay(10)).to eq('You paid the exact'\
-        ' amount, there is no change to give.')
+        # rubocop:disable Metrics/LineLength
+        expect { cash_register.pay(10) }.to output("You paid the exact amount, there is no change to give.\n").to_stdout
+        # rubocop:enable Metrics/LineLength
+      end
+      it 'make total zero' do
+        # rubocop:disable Metrics/LineLength
+        expect { cash_register.pay(10) }.to change(cash_register, :total).from(10).to(0)
+        # rubocop:enable Metrics/LineLength
       end
     end
   end
