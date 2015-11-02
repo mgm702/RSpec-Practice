@@ -22,8 +22,50 @@ describe DishWasher do
 
   describe '#load_dishes' do
     it 'ask how many dishes to load' do
-      allow(subject.total_dishes).to receive(:gets).and_return(20)
-      expect(subject.total_dishes).to eq(20)
+      allow(STDIN).to receive(:gets) { 20 }
+      expect(subject.load_dishes).to eq 20
+    end
+  end
+
+  describe 'unload_dishes' do
+    before { subject.total_dishes = 20 }
+    it 'should remove dishes from total_dishes' do
+      allow(STDIN).to receive(:gets) { 10 }
+      # rubocop:disable Metrics/LineLength
+      expect(subject.remove_dishes).to eq('You have 10 dishes left in the dishwasher')
+      # rubocop:enable Metrics/LineLength
+    end
+    it 'total equal zero if to many dishes are unloaded' do
+      allow(STDIN).to receive(:gets) { 22 }
+      # rubocop:disable Metrics/LineLength
+      expect(subject.remove_dishes).to eq('You have 0 dishes left in the dishwasher')
+      # rubocop:enable Metrics/LineLength
+    end
+  end
+
+  context 'When I run the dish washer' do
+    describe '#run_dishes' do
+      it 'won\'t work without soap' do
+        allow(STDIN).to receive(:gets) { 20 }
+        subject.load_dishes
+        expect(subject.run_dishwasher).to eq('You need to load the soap')
+      end
+      it 'won\'t run if there\'s to many dishes' do
+        subject.load_soap
+        allow(STDIN).to receive(:gets) { 50 }
+        subject.load_dishes
+        # rubocop:disable Metrics/LineLength
+        expect(subject.run_dishwasher).to eq('50 is to many dishes, please unload some before continuing')
+        # rubocop:enable Metrics/LineLength
+      end
+      it 'tell the owner to unload dishes after running it' do
+        subject.load_soap
+        allow(STDIN).to receive(:gets) { 30 }
+        subject.load_dishes
+        # rubocop:disable Metrics/LineLength
+        expect(subject.run_dishwasher).to eq('Dishwasher successfully ran, please unload it now!')
+        # rubocop:enable Metrics/LineLength
+      end
     end
   end
 end
