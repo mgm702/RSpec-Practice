@@ -32,13 +32,13 @@ describe DishWasher do
     it 'should remove dishes from total_dishes' do
       allow(STDIN).to receive(:gets) { 10 }
       # rubocop:disable Metrics/LineLength
-      expect(subject.remove_dishes).to eq('You have 10 dishes left in the dishwasher')
+      expect(subject.unload_dishes).to eq('You have 10 dishes left in the dishwasher')
       # rubocop:enable Metrics/LineLength
     end
     it 'total equal zero if to many dishes are unloaded' do
       allow(STDIN).to receive(:gets) { 22 }
       # rubocop:disable Metrics/LineLength
-      expect(subject.remove_dishes).to eq('You have 0 dishes left in the dishwasher')
+      expect(subject.unload_dishes).to eq('You have 0 dishes left in the dishwasher')
       # rubocop:enable Metrics/LineLength
     end
   end
