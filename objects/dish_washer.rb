@@ -86,3 +86,12 @@ class DishWasher
     end
   end
 end
+
+
+dish_washer = DishWasher.new
+dish_washer.load_dishes
+puts dish_washer.total_dishes
+dish_washer.start_dish_washer
+puts dish_washer.soap
+dish_washer.load_soap
+dish_washer.start_dish_washer
