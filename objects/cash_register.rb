@@ -6,19 +6,20 @@ class CashRegister
   end
 
   def purchase(amount)
-    @total += amount
+    @total += amount.to_f
   end
 
   def pay(amount)
-    @total -= amount
+    @total -= amount.to_f
     if @total < 0
-      puts "Your change is $#{@total.abs.round(2)}"
+      formatted_total = @total.abs
+      puts "Your change is $#{format("%.2f", formatted_total)}"
       @total = 0
     elsif @total == 0
       puts 'You paid the exact amount, there is no change to give.'
       @total = 0
     else
-      puts "Your new total is $#{@total.round(2)}"
+      puts "Your new total is $#{format("%.2f", @total)}"
     end
   end
 end
